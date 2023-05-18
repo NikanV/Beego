@@ -8,7 +8,7 @@
 ### ۱. ماژول‌های پایه (`base modules`):
   #### آ- `session modules`:
   این ماژول برای مدیریت داده `session` کاربر در برنامه استفاده میشود و این امکان را فراهم میسازد که اطلاعات مربوط به `session` را به کاربر میدهد.
-  برای اضافه کردن این `module` میتوان از دستور زیر استفاده کرد:
+  برای `install` کردن این `module` میتوان از دستور زیر استفاده کرد:
   ```bash
 go get github.com/beego/beego/v2/server/web/session
 ```
@@ -39,7 +39,38 @@ import (
   ##### د) `GetActiveSession`: کاربر `session` فعال را برمیگرداند.
   ##### ه) `SetHashFunc`: تابع `generate` کننده `id` برای `session` را تنظیم میکند.
   ##### و) `SetSecure`: برای فعال و غیرفعال سازی `secure cookie` میباشد.
-  
-  
 
+	
+#### ب- `logging modules`:
+	این ماژول با الهام گیری از `database/sql` برای پشتیبانی `net`، `consule` ،`file` و `stmp` برای مقصد بصورت پیشفرض تهیه شده است.
+	برای `install` کردن این `module` میتوان از دستور زیر استفاده کرد:
+	
+  ```bash
+go get github.com/beego/beego/v2/core/logs
+```
+  پس از نصب آن تنها لازم است که آنرا در پروژه خود بصورت زیر `import` کنید:
+  ```bash
+import (
+	"github.com/beego/beego/v2/core/logs"
+)
+```
+  سپس کافیست یک `log variable` برای برنامه خود تعریف کنید:
+  ```bash
+  log := logs.NewLogger($cache size$)
+```
+  در نهایت پس از اضافه کردن `log variable` میتوان با استفاده از متد `SetLogger`، به آن `provider` برای خروجی را به یکی از صورت های
+	
+  `console`، `file`، `multifile`، `conn`، `smtp`و `SetSecure` 
+  
+  برای پارامتر اول و `config` مخصوص آن `provider` را بصورت `string` برای پارامتر دوم داد:    
+  ```bash
+  log.SetLogger(logs.AdapterFile,{"filename":"$filename$","level":$level$,"maxlines":$maxlines$,"maxsize":$maxsize$,"daily":$boolean$,"maxdays":$maxdays$,"color":$settrueifneededtobecolorfull$})
+}
+```
+
+	
+	
+	
+	
+	
 </div>
