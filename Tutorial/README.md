@@ -5,7 +5,9 @@
 ### 📝فهرست
  - [پیش نیاز ها]()
  - [ساختن اولین برنامه]()
- - [ساختن controller و route]()
+ - [ساختن controller و router]()
+ - [ساختن view]()
+ - [اضافه کردن پایگاه داده redis]()
 
 
 ## پیش نیاز ها
@@ -90,7 +92,7 @@ http://localhost:8080/
 
 ## ساختن controller و router 
 
-برای اضافه کردن یک controlller کافی است به فولدر مربوط به آن بریم و یک فایل با پسوند `.go` بسازیم.
+برای اضافه کردن یک controlller کافی است به فولدر مربوط به آن بریم و یک فایل با پسوند `go.` بسازیم.
 
 <p align=center><img src="./src/images/controller_make.png" width=500 /></p>
 
@@ -143,7 +145,7 @@ func init() {
 
 همچنین در آرگومان سوم نوشتیم `get:GetEmployees` و می دانیم که طرف راست `:` همان اسم تابع است. اما طرف چپ آن در واقع نوع درخواست http ما است که می توانید با مراجعه به این [لینک](https://developer.mozilla.org/en-US/docs/Web/HTTP/Methods) بیشتر درمورد آنها مطالعه کنید.
 
-اکنون اگر دوباره پروژه را اجرا کنیم و به URL زیر برویم با همچین صفحه ای که در واقع همان response تابع `GetEmployees()` هست مواجه می شویم.
+اکنون اگر دوباره پروژه را اجرا کنیم و به URL زیر برویم با همچین صفحه ای که در واقع همان response تابع `()GetEmployees` هست مواجه می شویم.
 
 ```http
 http://localhost:8080/employees
@@ -154,6 +156,194 @@ http://localhost:8080/employees
 به همین صورت می توانیم هر controller ی که می خواهیم بسازیم و با router ها به هر URL ی که می خواهیم یک handler و یا تابعی از یک controller را نسبت بدهیم.
 
 ## ساختن view
+
+برای اضافه کردن یک view مشابه قسمت قبل به فولدر مربوطه رفته و یک فایل با پسوند `tpl.` بسازید.
+
+فایل های با پسوند `tpl.` فایل های Smarty هستند که به ما اجازه نوشتن همزمان html، css و یکسری syntax دیگر را می دهند. برای مطالعه بیشتر می توانید از این [لینک](https://smarty-php.github.io/smarty/4.x/) استفاده کنید.
+
+<p align=center><img src="./src/images/view_make.png" width=500 /></p>
+
+در این فایل به عنوان نمونه یک جدول تعریف کردیم و با استفاده از `range` روی همه مقادیر `employees` یک حلقه زدیم و فیلد های مربوط به آنها را در یک جدول وارد کردیم.
+
+```html
+<!DOCTYPE html>
+<html>
+    <body>
+        <table border= "1" style= "width:100%">
+        {{range .employees}}
+        <tr>
+            <td>{{.Id}}</td>
+            <td>{{.FirstName}}</td>
+            <td>{{.LastName}}</td>
+        </tr>
+        {{end}}
+        </table>
+    </body>
+</html>
+```
+
+بعد از اضافه کردن این فایل view باید تابعی در controller مربوطه تعریف کنیم که وظیفه کنترل این view را دارد.
+<br>
+برای این کار به فایل controller ی که قبل تر ساختیم می رویم و تابع زیر را به آن اضافه می کنیم.
+
+```golang
+func (dc *DemoController) Dashboard() {
+	dc.Data["employees"] = employees
+	dc.TplName = "dashboard.tpl"
+}
+```
+در این تابع چون قرار است یک view را نشان دهیم پس باید اسم فایل مربوط به آن را در تابع تنظیم کنیم که این کار با مقداردهی  `dc.TplName` قابل انجام است.
+<br>
+
+همچنین چون در فایل view از متغیر `employees` استفاده کردیم، پس باید آن را به لیست داده های این controller اضافه کنیم که این کار هم با اضافه کردن متغییر به `dc.Data` انجام پذیر است.
+
+همچنین به این توجه کنید که در فایل view بالا از `range` استفاده کردیم، چون می خواستیم مقادیری را به متغییر `employee` اضافه کنیم تا بهتر بتوانیم نتیجه را ببینیم.
+پس متغییر `employees` را به شکل زیر در همان controller 
+قبلی تعریف می کنیم.
+
+```golang
+var employees []Employee
+
+func init() {
+	employees = []Employee{{Id: 1, FirstName: "De", LastName: "Mo"},
+	{Id: 2, FirstName: "Ran", LastName: "Dom"},
+	{Id: 3, FirstName: "He", LastName: "Llo"}}
+}
+```
+
+و در نهایت باید مشابه قبل router مربوط به تابع جدید اضافه شده در controller را اضافه کنیم.
+
+```golang
+	beego.Router("/dashboard", &controllers.DemoController{}, "get:Dashboard")
+```
+
+برای دسترسی به این تابع هم می توانیم URL زیر را در نظر بگیریم.
+
+```http
+http://localhost:8080/dashboard
+```
+
+در نهایت با اجرای برنامه و رفتن به URL بالا می توانید صفحه زیر را مشاهده کنید.
+
+<p align=center><img src="./src/images/bee_site_3.png" width=500 /></p>
+
+به همین صورت می توانیم هر view ی که می خواهیم بسازیم و آن را به controller و router مربوطه اش متصل کنیم.
+
+تا اینجا توانستیم یک پروژه عادی را بالا بیاریم و یکسری controll، router و view داشته باشیم. اما در ادامه یاد می گیریم که چگونه از یکسری قابلیت های پیشرفته تر beego و یا از یک پایگاه داده مثل redis استفاده کنیم.
+
+
+## اضافه کردن پایگاه داده redis
+
+در ابتدا باید redis را نصب کنیم. برای نصب آن در windows باید از `WSL` استفاده کنید که از این [لینک](https://learn.microsoft.com/en-us/windows/wsl/install) می توانید استفاده کنید برای نصب `WSL` در windows. و اگر هم linux دارید و یا `WSL` را نصب کرده اید می توانید با استفاده از دستورات زیر یا مراجعه به این [لینک](https://redis.io/docs/getting-started/installation/install-redis-on-linux/) به نصب redis بپردازید.
+
+```bash
+curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
+
+echo "deb [signed-by=/usr/share/keyrings/redis-archive-keyring.gpg] https://packages.redis.io/deb $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/redis.list
+
+sudo apt-get update
+sudo apt-get install redis
+```
+
+پس از نصب باید `redis-server` را با دستور زیر شروع کنیم:
+
+```bash
+sudo service redis-server start
+```
+
+در ادامه می خواهیم یک HomePage داشته باشیم که تنها کارمندی که login کرده است اجازه دسترسی به آن را داشته باشد. و برای این کار یک تابع login و logout هم تعریف می کنیم.
+
+در این قسمت برای پیاده سازی پروژه و استفاده از redis از `session variable` ها استفاده می کنیم.
+
+در همین راستا ابتدا یک controller جدید به نام `sessionController` می سازیم که همان طور که بالاتر گفتیم دارای تابع های مربوط به Home، Login و Logout می باشد.
+
+<p align=center><img src="./src/images/session_controller_make.png" width=500 /></p>
+
+در ابتدا مشابه بقیه controller ها struct زیر را تعریف می کنیم.
+
+```golang
+type SessionController struct {
+	beego.Controller
+}
+```
+و در ادامه 
+در تابع مربوط به Home چک می کنیم که کارمند login کرده باشد و اگر نکرده بود تابع خطا بدهد.
+
+```golang
+func (sc *SessionController) Home() {
+	isAuthenticated := sc.GetSession("authenticated")
+	if isAuthenticated == nil || isAuthenticated == false {
+		sc.Ctx.WriteString("You are unauthorized to view the page.")
+		return
+	}
+	sc.Ctx.ResponseWriter.WriteHeader(200)
+	sc.Ctx.WriteString("Home Page")
+}
+```
+و
+در تابع های مربوط به Login و Logout به ترتیب مقدار session مربوطه را `true` و `false` می کنیم.
+
+```golang
+func (sc *SessionController) Login() {
+	sc.SetSession("authenticated", true)
+	sc.Ctx.ResponseWriter.WriteHeader(200)
+	sc.Ctx.WriteString("You have successfully logged in.")
+}
+
+func (sc *SessionController) Logout() {
+	sc.SetSession("authenticated", false)
+	sc.Ctx.ResponseWriter.WriteHeader(200)
+	sc.Ctx.WriteString("You have successfully logged out.")
+}
+```
+
+پس از ساختن این controller باید router های مربوط به آن را در فایل `router.go` اضافه کنیم.
+
+```golang
+    beego.Router("/home", &controllers.SessionController{}, "get:Home")
+	beego.Router("/login", &controllers.SessionController{}, "get:Login")
+	beego.Router("/logout", &controllers.SessionController{}, "get:Logout")
+```
+
+اکنون در این مرحله باید به فایل `main.go` رفته و redis را هم import کنیم.
+
+قبل از آن اگر redis را در GO  نصب نکرده اید با استفاده از دستور های زیر این کار را بکنید.
+
+```bash
+go get github.com/redis/go-redis/v9
+go mod tidy
+```
+سپس آن را import کنید.
+
+```golang
+	_ "github.com/astaxie/beego/session/redis"
+```
+
+و در مرحله آخر هم باید `Session Variables` ی که گفته بودیم را در فایل `app.conf` تعریف کنیم.
+
+```golang
+SessionOn = true
+SessionProvider = "redis"
+SessionProviderConfig = "127.0.0.1:6379"
+```
+
+آدرس تعریف شده در متغیر `SessionProviderConfig` همان آدرسی است که سرویس redis را روی آن بالا آوردیم.
+
+اکنون اگر برنامه را اجرا کنیم و سعی کنیم قبل از login کردن وارد URL زیر بشویم با error زیر مواجه خواهیم شد.
+
+```http
+https://localhost:8080/home
+```
+
+<p align=center><img src="./src/images/home_error.png" width=500 /></p>
+
+اما اگر ابتدا با رفتن به آدرس زیر login کنیم و با cookie بدست آمده که در شکل زیر هم مشخص است به صفحه Home برویم می توانیم آن را ببینیم.
+
+<p align=center><img src="./src/images/login.png" width=500 /></p>
+
+در شکل زیر چون در browser هستیم cookie ما به صورت خودکار اعمال می شود اما اگر با استفاده از ابزار هایی مثل cURL می خواهیم این کار را انجام دهیم باید در فیلد مربوطه مثل
+ `cookie--` آن را وارد کنیم.
+
 
 
 </div>
