@@ -11,7 +11,7 @@
 
  - [نیما میری](https://github.com/NimaEnigma)
  - [نیکان واسعی](https://github.com/NikanV)
- - [علیرضا کاظمینی]()
+ - [علیرضا کاظمینی](https://github.com/alirezakazemeini)
 
 <p align=center><img src="./Introduction/src/images/logo3.png" width=200 /></p>
 
