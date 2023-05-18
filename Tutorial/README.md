@@ -51,11 +51,11 @@ bee new your_project_name
 و به جای `your_project_name` هر اسمی که می خواهید برای پروژه خود انتخاب کنید را قرار دهید.
 پس از اجرای دستور بالا پیغامی مشابه زیر دریافت خواهید کرد.
 
-<p align=center><img src="./src/images/bee_new_project.PNG" width=500 /></p>
+<p align=center><img src="./src/images/bee_new_project.png" width=500 /></p>
 
 اکنون اگر به فولدر ساخته شده با اسمی که انتخاب کردید بروید، فایل های پروژه را می بینید که توسط beego  برای شما ساخته شده اند.
 
-<p align=center><img src="./src/images/bee_list.PNG" width=500 /></p>
+<p align=center><img src="./src/images/bee_list.png" width=500 /></p>
 
 بعد از ساخت پروژه کافی است ابتدا کتابخانه های مربوطه را بریزید که به راحتی با دستور زیر قابل انجام است:
 
@@ -73,7 +73,7 @@ bee run
 
 وقتی پروژه اجرا می شود، صفحه ای مانند صفحه زیر خواهید داشت:
 
-<p align=center><img src="./src/images/bee_run.PNG" width=500 /></p>
+<p align=center><img src="./src/images/bee_run.png" width=500 /></p>
 
 پروژه به صورت پیش فرض روی پورت 8080 مربوط به localhost بالا می آید.
 پس با رفتن به URL زیر می توانید نمای اولیه سایت خود را ببینید.
@@ -82,7 +82,7 @@ bee run
 http://localhost:8080/
 ```
 
-<p align=center><img src="./src/images/bee_site.PNG" width=500 /></p>
+<p align=center><img src="./src/images/bee_site.png" width=500 /></p>
 
 در ادامه خواهیم دید که چه طور به پروژه خود controller، view و خیلی قابلیت های دیگر اضافه کنیم.
 
