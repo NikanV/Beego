@@ -13,7 +13,7 @@
  - [نیکان واسعی](https://github.com/NikanV)
  - [علیرضا کاظمینی]()
 
-<p align=center><img src="./Introduction/src/images/logo.png" width=200 /></p>
+<p align=center><img src="./Introduction/src/images/logo3.png" width=200 /></p>
 
 
 
