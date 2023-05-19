@@ -34,10 +34,10 @@ func (dc *DatabaseCheck) Check() error {
 	
 سپس میتوان آنرا بعنوان یک check item به برنامه اضافه کرد و به آن request برای چک کردن بالا بودن database داد:
 
-  ‍‍‍```go
+  ```go
 admin.AddHealthCheck("database",&DatabaseCheck{})
 ```
-
+	
 ### 2- ساخت profile:
 مانیتور کردن پروسه‌های برنامه یکی از راه‌های مناسب برای اطلاع از عملکرد آن میباشد. بیگو با امکان profiling این قابلیت را به کاربر میدهد که یک entry point به بخش‌های مختلف برنامه برای debug داشته باشد. admin module با استفاده از `ProcessInput` در profiling به عنوان تابع entry، درخواست ها را process میکند. برای مثال میتوان موارد زیر را lookup کرد:
 	
