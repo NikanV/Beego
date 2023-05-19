@@ -12,6 +12,11 @@
    - [اضافه کردن Session Variable](#اضافه-کردن-session-variable)
  - [اضافه کردن Filter](#اضافه-کردن-filter)
  - [مدیریت Error ها](#مدیریت-error-ها)
+ - [نحوه monitor کردن برنامه](#نحوه-monitor-کردن-برنامه)
+ - [مستقر کردن برنامه روی دستگاه local](#مستقر-کردن-برنامه-روی-دستگاه-local)
+ - [مستقر کردن برنامه روی nginx](#مستقر-کردن-برنامه-روی-nginx)
+   - [نصب و راه اندازی](#d986d8b5d8a8-d988-d8b1d8a7d987-d8a7d986d8afd8a7d8b2db8c-1)
+ - [منابع](#منابع)
 
 ## پیش نیاز ها
 - زبان برنامه نویسی GO
@@ -507,6 +512,157 @@ http://localhost:8080/employeesid?id=5
 
 به همین صورت می توانیم بقیه انواع ارور ها را هم مدیریت کنیم.
 
+## پیاده سازی Caching
+
+یکی دیگر از کار هایی که می تواند جنبه های زیادی از برنامه ما را بهبود بخشد استفاده از `caching` است.
+برای مطالعه بیشتر درباره `caching` در برنامه های تحت وب می توانید از این [لینک](https://aws.amazon.com/caching/web-caching/#:~:text=Caching%20web%20content%20helps%20improve,than%20from%20the%20origin%20servers.) استفاده کنید.
+
+برای استفاده از `caching` باید کتابخانه `cache` را import کرده باشید.
+<br>
+اگر این کتابخانه را ندارید می توانید با استفاده از دستور زیر آن را نصب کنید.
+
+```golang
+go get github.com/astaxie/beego/cache
+go mod tidy
+```
+
+سپس یک controller برای کنترل کردن `cache` به اسم `cacheController.go` می سازیم.
+
+<p align=center><img src="./src/images/cache_make.png" width=500 /></p>
+
+در ابتدای فایل باید کتابخانه های `beego` و `cache` را import کنیم و controller را تعریف کنیم.
+
+```golang
+import "github.com/astaxie/beego"
+import "github.com/astaxie/beego/cache"
+
+type CacheController struct {
+	beego.Controller
+}
+```
+
+سپس یک متغیر `cache` تعریف می کنیم و آن را در تابع init مقدار دهی می کنیم.
+
+```golang
+var beegoCache cache.Cache
+var err error
+
+func init() {
+	beegoCache, err = cache.NewCache("memory", `{"interval":60}`)
+	beegoCache.Put("De", "Mo", 100000*time.Second)
+}
+```
+
+برای مطالعه بیشتر در مورد `cache` در `beego` به این [لینک](https://github.com/beego/beedoc/blob/master/en-US/module/cache.md) مراجعه کنید.
+
+و در نهایت تابع استفاده از `cache` را اضافه می کنیم که برای مقدار متنساب با کلید `De` را بر می گرداند.
+
+```golang
+func (cc *CacheController) GetFromCache() {
+	de := beegoCache.Get("De")
+	cc.Ctx.WriteString("Hello " + fmt.Sprintf("%v", de))
+}
+```
+
+بعد از ساخت controller اکنون باید router مربوط به آن را هم بسازیم. پس به فایل `router.go` رفته و قطعه کد زیر را اضافه می کنیم.
+
+```golang
+	beego.Router("/getfromcache", &controllers.CacheController{}, "get:GetFromCache")
+```
+
+اکنون اگر برنامه را  اجرا کنیم و به URL زیر برویم می بینیم که برای ما مقدار متناسب با کلیدی که تعریف کردیم را بر می گرداند.
+
+```html
+http://localhost:8080/getfromcache
+```
+
+<p align=center><img src="./src/images/cache_site.png" width=500 /></p>
+
+به همین صورت می توانیم مقادیری که می خواهیم را `cache` کنیم و آنها را خروجی دهیم.
+
+## نحوه monitor کردن برنامه
+
+یکی از کار هایی که می تواند به ما در نگه داری از سایتمان کمک کند `monitor` کردن آن است.
+<br>
+برای مطالعه در مورد انواع روش های `monitoring` می توانید به این [لینک](https://stackify.com/what-is-application-performance-monitoring/#:~:text=Here%20are%20some%20other%20examples,and%20monitoring%20application%20error%20rates.) مراجعه کنید.
+
+برای اضافه کردن این ویژگی به پروژه کافی است خط های زیر را به فایل `app.conf` اضافه کنیم.
+
+```golang
+EnableAdmin = true
+AdminAddr = "localhost"
+AdminPort = 8090
+```
+
+اکنون اگر برنامه را اجرا کنیم و به آدرسی کا بالا برای `Admin` در نظر گرفتیم برویم می توانیم به صفحه ی از پیش ساخته شده برای monitor کردن برنامه دسترسی پیدا کنیم.
+
+<p align=center><img src="./src/images/admin_site.png" width=500 /></p>
+
+سپس اگر به قسمتی که در شکل مشخص است برویم می توانیم به صورت زنده لیستی از همه درخواست هایی که به سایت زده شده ببینیم.
+
+به عنوان مثال اگر یک بار درخواست زیر را بفرستیم و سپس به صفحه ی پیش فرض `monitoring` نگاه کنیم می توانیم آن درخواست را ببینیم.
+
+```html
+http://localhost:8080/dashboard
+```
+
+<p align=center><img src="./src/images/admin_stats.png" width=500 /></p>
+
+## مستقر کردن برنامه روی دستگاه local
+
+برای اینکه بتوانیم پروژه خود را `deploy` کنیم کافی است خط زیر را به فایل `app.conf` اضافه کنیم.
+
+```golang
+beego.RunMode = "prod"
+```
+
+برای مطالعه در مورد انواع `runmode` می توانید به این [سایت](https://github.com/beego/beedoc/blob/master/en-US/mvc/controller/config.md) مراجعه کنید.
+
+سپس کافی است فولدر های `conf` ، `static` ، `views` را به همراه فایل قابل اجرای پروژه در یک فولدر جدید بریزید به عنوان مثال به صورت زیر می توانید کار کنید.
+
+<p align=center><img src="./src/images/deployment.png" width=500 /></p>
+
+اکنون می توانید با هر کامندی که می خواهید بسته به سیستم عامل خود این پروژه را در پس زمینه اجرا کنید. به عنوان مثال در windows با رفتن به فولدر جدیدی که ساختیم و با استفاده از دستور زیر می توانیم پروژه را اجرا کنیم.
+
+```bash
+start ./my_demo_project.exe
+```
+
+و یا در linux با استفاده از دستور `nohup` می توانید این کار را انجام دهید.
+
+## مستقر کردن برنامه روی nginx
+
+### نصب و راه اندازی
+
+در ابتدا باید nginx را نصب کنید.
+برای این کار در windows می توانید با دانلود کردن فایل آن از [سایت](https://nginx.org/en/download.html) اصلی nginx این کار را انجام دهید و در linux هم می توانید با استفاده از دستور زیر این کار را انجام دهید.
+
+```bash
+sudo apt update
+sudo apt install nginx
+```
+
+اکنون اگر فایل قابل اجرا دانلود شده را اجرا کنید و به URL زیر بروید می بینید که nginx روی پورت 80 اجرا شده.
+
+```html
+http://localhost:80
+```
+
+<p align=center><img src="./src/images/nginx_make.png" width=500 /></p>
+
+برای مستقر کردن پروژه روی nginx کافی است ابتدا به فولدری که nginx را نصب کردید بروید و سپس به فایل `nginx.conf` در فولدر conf رفته و خط های مشخص شده در شکل را تغییر دهید.
+
+<p align=center><img src="./src/images/nginx_conf.png" width=500 /></p>
+
+اکنون اگر دوباره nginx را اجرا کنید و سپس پروژه را اجرا کنید خواهید دید که وقتی در مرورگر URL زیر را می نویسید همان پروژه را برای شما می آورد.
+
+```html
+http://localhost:80
+```
+
+در این بخش سعی کردیم که یک پروژه با اجزای شبیه به یک پروژه واقعی را بسازیم و با برخی از ابزار های پرکاربرد دنیای امروز کار کنیم. برای مطالعه بیشتر هم می توانید از منابع زیر استفاده کنید.
+
+## منابع
 
 
 </div>
