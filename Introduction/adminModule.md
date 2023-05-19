@@ -56,4 +56,6 @@ admin.StatisticsMap.GetMap(os.Stdout)
 	
 	
 	
+[بازگشت](https://github.com/NikanV/Beego/blob/introbranch/Introduction/BaseModules.md)
+
 </div>
