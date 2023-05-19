@@ -1,6 +1,6 @@
 <div dir="rtl">
   
-# آ- log modules:
+## آ- log modules:
 این ماژول با الهام گیری از `database/sql` برای پشتیبانی `net`، `consule` ،`file` و `stmp` برای مقصد بصورت پیشفرض تهیه شده است.
 برای install کردن این module میتوان از دستور زیر استفاده کرد:
 	
@@ -27,7 +27,7 @@ log := logs.NewLogger($cache size$)
 log.SetLogger(logs.AdapterFile,{"filename":"$filename$","level":$level$,"maxlines":$maxlines$,"maxsize":$maxsize$,"daily":$boolean$,"maxdays":$maxdays$,"color":$settrueifneededtobecolorfull$})
 }
 ```
-## روش log کردن اطلاعات:
+### روش log کردن اطلاعات:
 برای اینکه شماره خط و نام فایل را در فایل log قرار دهیم، میتوانیم از تابع 'EnableFuncCallDepth' بصورت زیر استفاده کنیم. این تابع بصورت پیشفرض غیرفعال بوده و برای فعال کردن آن میتوان آنرا بصورت زیر صدا زد:
 	
 	
@@ -38,10 +38,10 @@ log.EnableFuncCallDepth(true)
   ```go
 log.SetLogFuncCallDepth($numberofstackframestobeskipped$)
 ```
-## گرفتن log بصورت asynchronously:
+### گرفتن log بصورت asynchronously:
 برای این کار تنها لازم است از تابع `.Async()` استفاده کرد تا log ها بصورت همزمان گرفته نشوند.
 
-## پیکربندی providerها:
+### پیکربندی providerها:
 هر provider اعم از `console`، `file`، ‍`multifile`‍، `conn`، `smtp`، ‍`ElasticSearch`، ‍`JianLiao` یا `Slack` تنها یک مجموعه‌ای از configها را پشتیبانی میکند.
 	
 - console:
@@ -163,7 +163,7 @@ log.SetLogger(logs.AdapterJianLiao, `{"authorname":"$authorname$","title":"$titl
 log.SetLogger(logs.AdapterSlack, `{"webhookurl":"$url$","level":$requiredlevel$}`)
 ```
 
-## سایر format های log گرفتن:
+### سایر format های log گرفتن:
 در بیگو، log گرفتن با فرمت‌های متفاوت با override کردن توابع امکان پذیر است و میتوان format یک log را متناسب با adaptor تغییر داد. دستور این عمل بصورت زیر میباشد:
 	
   ```go
