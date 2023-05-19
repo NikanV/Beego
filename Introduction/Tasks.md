@@ -33,4 +33,8 @@ tk1 := task.NewTask($name$,$taskformat$, $TaskFunc$) *Task
 برای زمانیکه میخواهیم task جدید را اجرا کنیم، از `spec` استفاده میکنیم که format آن مانند crontab میباشد.
   
   برای debug برنامه، beego از توابع `Display` و `GetDisplayString` استفاده میکند. هر دوی این توابع ورودی‌ها را بصورت key,value دریافت میکنند ولی تابع display نتیجه را در console نمایش میدهد و getdisplaystring نتیجه را بصورت string برمیگرداند.
+
+  
+    [بازگشت](https://github.com/NikanV/Beego/blob/introbranch/Introduction/Intro.md)
+
 </div>
