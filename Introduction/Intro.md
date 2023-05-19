@@ -8,7 +8,7 @@
 1. [base modules](https://github.com/NikanV/Beego/blob/introbranch/Introduction/BaseModules.md)
 2. [tasks](https://github.com/NikanV/Beego/blob/introbranch/Introduction/Tasks.md)
 3. [client](https://github.com/NikanV/Beego/blob/introbranch/Introduction/Client.md)
-4. [server]()
+4. [server](https://github.com/NikanV/Beego/blob/introbranch/Introduction/Server.md)
   
 	
 [بازگشت]()
