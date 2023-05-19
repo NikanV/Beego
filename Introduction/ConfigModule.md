@@ -1,6 +1,6 @@
 <div dir="rtl">
 
-# ب- config modules:
+## ب- config modules:
 این ماژول نیز مانند [log module]() با الهام گیری از `database/sql` برای parse کردن فایل‌های config با فرمت‌های `ini`، `json`، `xml` و `yaml` استفاده میشود. 
 برای install کردن این module میتوان از دستور زیر استفاده کرد:
 	
