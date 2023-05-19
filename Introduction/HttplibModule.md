@@ -80,7 +80,28 @@
   req.Header("Accept-Encoding","gzip,deflate,sdch")
   ```
   
-  
+  برای `file upload` میتوان از تابع `postFile` استفاده کرد. این تابع برای ورودی خود دو پارامتر دریافت میکند. پارامتر اول نام فرم و پارامتر دوم نام یا آدرس فایل است:
+	
+```go
+req.PostFile("$formname$", "$filenameorpath$")
+str, err := b.String()
+if err != nil {
+    t.Fatal(err)
+}
+```
+
+برای دریافت response پس از فرستادن request توسط get، راه‌های زیر ممکن است:
+
+	
+|Method                          |Type                     |توضیح                                                |
+|--------------------------------|-------------------------|-----------------------------------------------------------|
+|<div>`req.Response()` </div>               |<div>`(*http.Response, error)`</div>|یک httpresponse برمیگرداند که میتوان data از آن خواند|
+|<div>`req.Bytes()`</div>                   |<div>`([]byte, error)`</div>        |بدنه خام یک response را بر میگرداند       |
+|<div>`req.String()`</div>                  |<div>`(string, error)`</div>        |بدنه خام یک response را بر میگرداند                                 |
+|<div>`req.ToFile(filename string)`</div>   |<div>`error`</div>                  |بدنه response را دی فایل ذخیره میکند                           |
+|<div>`req.ToJSON(result interface{})`</div>|<div>`error`</div>                  |فایل response که به فرمت `json` است را به یک object تبدیل میکند             |
+|<div>`req.ToXml(result interface{})`</div> |<div>`error`</div>                  |فایل response که به فرمت `xml` است را به یک object تبدیل میکند                 |
+
   
   [بازگشت](https://github.com/NikanV/Beego/blob/introbranch/Introduction/Client.md?)
 
