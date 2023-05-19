@@ -96,7 +96,7 @@ http://localhost:8080/
 
 <p align=center><img src="./src/images/bee_site.png" width=500 /></p>
 
-در ادامه خواهیم دید که چه طور به پروژه خود controller، view و خیلی قابلیت های دیگر اضافه کنیم.
+در ادامه خواهیم دید که چه طور به پروژه خود controller، view و خیلی قابلیت های دیگر اضافه کنید.
 
 ## اضافه کردن Controller و Router 
 
@@ -133,7 +133,7 @@ func (dc *DemoController) GetEmployees() {
 
 برای مطالعه درباره نحوه نوشتن struct های مناسب با json و کار کردن با json در زبان GO می توانید از این [لینک](https://gobyexample.com/json) و این [لینک](https://go.dev/blog/json) استفاده کنید.
 
-در آخر هم یک تابع به نام init داریم که این تابع هنگام ساخته شدن این controller صدا زده می شود، پس در واقع مقادیری را که لازم است در ابتدا مقدار دهی کنیم می توانیم در این تابع قرار دهیم.
+در آخر هم یک تابع به نام `init` داریم که این تابع هنگام ساخته شدن این controller صدا زده می شود، پس در واقع مقادیری را که لازم است در ابتدا مقدار دهی کنیم می توانیم در این تابع قرار دهیم.
 
 ```golang
 func init() {
@@ -145,7 +145,7 @@ func init() {
 
 <p align=center><img src="./src/images/route_make.png" width=500 /></p>
 
-تنها خطی که لازم است اضافه کنیم خط زیر می باشد و کاری که انجام می دهد این است که به router می گوید که اگر در url آدرس /employess نوشته شده بود با استفاده از controller ی که به عنوان دومین آرگومان به آن پاس داده شده و تابعی از همین controller که به عنوان سومین آرگومان به آن پاس داده شده برای من یک response برگرداند.
+تنها خطی که لازم است اضافه کنیم خط زیر می باشد و کاری که انجام می دهد این است که به router می گوید که اگر در url آدرس `/employees` نوشته شده بود با استفاده از controller ی که به عنوان دومین آرگومان به آن پاس داده شده و تابعی از همین controller که به عنوان سومین آرگومان به آن پاس داده شده برای من یک response برگرداند.
 
 ```golang
 	beego.Router("/employees", &controllers.DemoController{}, "get:GetEmployees")
@@ -167,7 +167,7 @@ http://localhost:8080/employees
 
 برای اضافه کردن یک view مشابه قسمت قبل به فولدر مربوطه رفته و یک فایل با پسوند `tpl.` بسازید.
 
-فایل های با پسوند `tpl.` فایل های Smarty هستند که به ما اجازه نوشتن همزمان html، css و یکسری syntax دیگر را می دهند. برای مطالعه بیشتر می توانید از این [لینک](https://smarty-php.github.io/smarty/4.x/) استفاده کنید.
+فایل های با پسوند `tpl.` فایل های `Smarty` هستند که به ما اجازه نوشتن همزمان html، css و یکسری syntax دیگر را می دهند. برای مطالعه بیشتر می توانید از این [لینک](https://smarty-php.github.io/smarty/4.x/) استفاده کنید.
 
 <p align=center><img src="./src/images/view_make.png" width=500 /></p>
 
@@ -244,7 +244,7 @@ http://localhost:8080/dashboard
 
 ### نصب و راه اندازی
 
-در ابتدا باید redis را نصب کنیم. برای نصب آن در windows باید از `WSL` استفاده کنید که از این [لینک](https://learn.microsoft.com/en-us/windows/wsl/install) می توانید استفاده کنید برای نصب `WSL` در windows. و اگر هم linux دارید و یا `WSL` را نصب کرده اید می توانید با استفاده از دستورات زیر یا مراجعه به این [لینک](https://redis.io/docs/getting-started/installation/install-redis-on-linux/) به نصب redis بپردازید.
+در ابتدا باید `redis` را نصب کنیم. برای نصب آن در windows باید از `WSL` استفاده کنید که از این [لینک](https://learn.microsoft.com/en-us/windows/wsl/install) می توانید استفاده کنید برای نصب `WSL` در windows. و اگر هم linux دارید و یا `WSL` را نصب کرده اید می توانید با استفاده از دستورات زیر یا مراجعه به این [لینک](https://redis.io/docs/getting-started/installation/install-redis-on-linux/) به نصب `redis` بپردازید.
 
 ```bash
 curl -fsSL https://packages.redis.io/gpg | sudo gpg --dearmor -o /usr/share/keyrings/redis-archive-keyring.gpg
@@ -319,7 +319,7 @@ func (sc *SessionController) Logout() {
 
 اکنون در این مرحله باید به فایل `main.go` رفته و redis را هم import کنیم.
 
-قبل از آن اگر redis را در GO  نصب نکرده اید با استفاده از دستور های زیر این کار را بکنید.
+قبل از آن اگر `redis` را در GO  نصب نکرده اید با استفاده از دستور های زیر این کار را بکنید.
 
 ```bash
 go get github.com/redis/go-redis/v9
@@ -339,7 +339,7 @@ SessionProvider = "redis"
 SessionProviderConfig = "127.0.0.1:6379"
 ```
 
-آدرس تعریف شده در متغیر `SessionProviderConfig` همان آدرسی است که سرویس redis را روی آن بالا آوردیم.
+آدرس تعریف شده در متغیر `SessionProviderConfig` همان آدرسی است که سرویس `redis` را روی آن بالا آوردیم.
 
 اکنون اگر برنامه را اجرا کنیم و سعی کنیم قبل از login کردن وارد URL زیر بشویم با error زیر مواجه خواهیم شد.
 
@@ -349,11 +349,11 @@ https://localhost:8080/home
 
 <p align=center><img src="./src/images/home_error.png" width=500 /></p>
 
-اما اگر ابتدا با رفتن به آدرس زیر login کنیم و با cookie بدست آمده که در شکل زیر هم مشخص است به صفحه Home برویم می توانیم آن را ببینیم.
+اما اگر ابتدا با رفتن به آدرس زیر login کنیم و با `cookie` بدست آمده که در شکل زیر هم مشخص است به صفحه Home برویم می توانیم آن را ببینیم.
 
 <p align=center><img src="./src/images/login.png" width=500 /></p>
 
-در شکل زیر چون در browser هستیم cookie ما به صورت خودکار اعمال می شود اما اگر با استفاده از ابزار هایی مثل cURL می خواهیم این کار را انجام دهیم باید در فیلد مربوطه مثل
+در شکل زیر چون در browser هستیم `cookie` ما به صورت خودکار اعمال می شود اما اگر با استفاده از ابزار هایی مثل cURL می خواهیم این کار را انجام دهیم باید در فیلد مربوطه مثل
  `cookie--` آن را وارد کنیم.
 
 ## اضافه کردن Filter
@@ -371,7 +371,7 @@ go mod tidy
 
 <p align=center><img src="./src/images/filter_make.png" width=500 /></p>
 
-در فایلی که ساختیم ابتدا باید کتابخانه Context را import کنیم که به صورت زیر قابل انجام است.
+در فایلی که ساختیم ابتدا باید کتابخانه `Context` را import کنیم که به صورت زیر قابل انجام است.
 
 ```golang
 "github.com/astaxie/beego/context"
@@ -385,7 +385,7 @@ var LogManager = func(ctx *context.Context) {
 }
 ```
 
-کاری که در این تابع انجام می دهیم این است که یک `Context` به عنوان ورودی می گیریم و آدرس IP آن و زمانی که این Context آمده را چاپ می کنیم. با این کار انگار که داریم Log می اندازیم.
+کاری که در این تابع انجام می دهیم این است که یک Context به عنوان ورودی می گیریم و آدرس IP آن و زمانی که این Context آمده را چاپ می کنیم. با این کار انگار که داریم Log می اندازیم.
 
 بعد از تعریف کردن Filter باید مثل Controller ها به آن یک Router وصل کنیم. پس مشابه قبل به فایل `router.go` رفته و خط زیر را اضافه می کنیم.
 
@@ -410,7 +410,7 @@ import "my_demo_project/filters"
 
 ## مدیریت Error ها
 
-می دانیم که یکی از مهم ترین بخش های یک web application بخش error handling آن است. پس ما هم در این مرحله یک نمونه ساده از آن را پیاده سازی می کنیم.
+می دانیم که یکی از مهم ترین بخش های یک web application بخش `Error handling` آن است. پس ما هم در این مرحله یک نمونه ساده از آن را پیاده سازی می کنیم.
 
 برای این کار ابتدا یک controller که وظیفه کنترل error ها را دارد به فولدر controllers اضافه می کنیم.
 
@@ -474,7 +474,7 @@ func (dc *DemoController) GetEmployeeID() {
 }
 ```
 
-در این تابع به صورت کلی داریم روی employees حلقه می زنیم و هر کارمندی که `Id` برابری با id داده شده در ورودی داشته باشد را به لیست کارمندانی که خروجی می دهیم اضافه می کنیم. در آخر هم اگر همچین کارمندی وجود نداشت ارور `generic` را بر می گردانیم.
+در این تابع به صورت کلی داریم روی `employees` حلقه می زنیم و هر کارمندی که `Id` برابری با id داده شده در ورودی داشته باشد را به لیست کارمندانی که خروجی می دهیم اضافه می کنیم. در آخر هم اگر همچین کارمندی وجود نداشت ارور `generic` را بر می گردانیم.
 
 دوباره مشابه قبل باید router مربوط به این تابع را در فایل `router.go` اضافه کنیم.
 
@@ -517,7 +517,7 @@ http://localhost:8080/employeesid?id=5
 یکی دیگر از کار هایی که می تواند جنبه های زیادی از برنامه ما را بهبود بخشد استفاده از `caching` است.
 برای مطالعه بیشتر درباره `caching` در برنامه های تحت وب می توانید از این [لینک](https://aws.amazon.com/caching/web-caching/#:~:text=Caching%20web%20content%20helps%20improve,than%20from%20the%20origin%20servers.) استفاده کنید.
 
-برای استفاده از `caching` باید کتابخانه `cache` را import کرده باشید.
+برای استفاده از `caching` باید کتابخانه cache را import کرده باشید.
 <br>
 اگر این کتابخانه را ندارید می توانید با استفاده از دستور زیر آن را نصب کنید.
 
@@ -541,7 +541,7 @@ type CacheController struct {
 }
 ```
 
-سپس یک متغیر `cache` تعریف می کنیم و آن را در تابع init مقدار دهی می کنیم.
+سپس یک متغیر `cache` تعریف می کنیم و آن را در تابع `init` مقدار دهی می کنیم.
 
 ```golang
 var beegoCache cache.Cache
@@ -634,15 +634,15 @@ start ./my_demo_project.exe
 
 ### نصب و راه اندازی
 
-در ابتدا باید nginx را نصب کنید.
-برای این کار در windows می توانید با دانلود کردن فایل آن از [سایت](https://nginx.org/en/download.html) اصلی nginx این کار را انجام دهید و در linux هم می توانید با استفاده از دستور زیر این کار را انجام دهید.
+در ابتدا باید `nginx` را نصب کنید.
+برای این کار در windows می توانید با دانلود کردن فایل آن از [سایت](https://nginx.org/en/download.html) اصلی `nginx` این کار را انجام دهید و در linux هم می توانید با استفاده از دستور زیر این کار را انجام دهید.
 
 ```bash
 sudo apt update
 sudo apt install nginx
 ```
 
-اکنون اگر فایل قابل اجرا دانلود شده را اجرا کنید و به URL زیر بروید می بینید که nginx روی پورت 80 اجرا شده.
+اکنون اگر فایل قابل اجرا دانلود شده را اجرا کنید و به URL زیر بروید می بینید که `nginx` روی پورت `80` اجرا شده.
 
 ```html
 http://localhost:80
@@ -663,6 +663,8 @@ http://localhost:80
 در این بخش سعی کردیم که یک پروژه با اجزای شبیه به یک پروژه واقعی را بسازیم و با برخی از ابزار های پرکاربرد دنیای امروز کار کنیم. برای مطالعه بیشتر هم می توانید از منابع زیر استفاده کنید.
 
 ## منابع
-
+- https://pkg.go.dev/github.com/astaxie/beego
+- https://github.com/beego/beego-doc/blob/main/docs/en-US/README.md
+- https://www.youtube.com/watch?v=s1RSXRCxR6U&t=221s&ab_channel=FreeTechAcademy
 
 </div>
