@@ -171,5 +171,7 @@ log.SetLoggerWithOpts("adapterName", []string{'{"key":"value"}'}, utils.KV{Key:"
 ```
 
 	
+    [بازگشت](https://github.com/NikanV/Beego/blob/introbranch/Introduction/BaseModules.md)
+
 	
 </div>
