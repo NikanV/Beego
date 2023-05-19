@@ -123,6 +123,7 @@ iniconf.String("demo::key2")
 
 که امکان دریافت value1 از envvar1 بالا بصورت `beego.AppConfig.String("envvar1")` میسر میشود (برای envvar2 نیز به همین صورت است).
 	
-    [بازگشت](https://github.com/NikanV/Beego/blob/introbranch/Introduction/BaseModules.md)
+
+[بازگشت](https://github.com/NikanV/Beego/blob/introbranch/Introduction/BaseModules.md)
 
 </div>
