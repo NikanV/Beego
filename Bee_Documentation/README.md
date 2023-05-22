@@ -5,6 +5,17 @@
 ### 📝فهرست
  - [نصب bee](#نصب-bee)
  - [دستورات bee](#دستورات-bee)
+   - [دستور new](#دستور-new)
+   - [دستور api](#دستور-api)
+   - [دستور run](#دستور-run)
+   - [دستور pack](#دستور-pack)
+   - [دستور bale](#دستور-bale)
+   - [دستور version](#دستور-version)
+   - [دستور generate](#دستور-generate)
+   - [دستور migrate](#دستور-migrate)
+   - [دستور dockerize](#دستور-dockerize)
+   - [دستور dlv](#دستور-dlv)
+   - [دستور server](#دستور-server)
  - [کانفیگ ابزار bee](#کانفیگ-ابزار-bee)
 
 ## نصب bee
@@ -13,7 +24,7 @@
 ```bash
 go install github.com/beego/bee@latest
 ```
-برای آپدیت کردن نسخه `bee` نیز میتوانید از دستور زیر استفاده کنید:
+برای آپدیت کردن نسخه `bee` نیز میتوانید از دستور زیر استفاده کنید:(دستور bee update نیز این کار را میکند.)
 
 ```bash
 go get -u github.com/beego/bee/v2@latest
@@ -29,7 +40,8 @@ go get -u github.com/beego/bee/v2@latest
 
  <p align=center><img src="./src/images/commands.png" width=500 /></p>
 
-## دستور new<br>
+## دستور new
+
   دستور `new` یک پروژه وب جدید ایجاد میکند. شما میتوانید با دستور زیر یک پروژه جدید beego درست کنید که فایل ها و پوشه های پیشفرض را ایجاد میکند.
 
 <div dir="ltr">
@@ -43,7 +55,7 @@ bee new <project_name>
 
  <p align=center><img src="./src/images/defaults.png" width=500 /></p>
 
- ## دستور api
+## دستور api
 
  دستور `api` یک اپلیکیشن API جدید ایجاد میکند. در پایین سینتکس دستور `api` و نتیجه اجرای آن را میبینید:
 
@@ -238,6 +250,101 @@ bee migrate refresh [-driver=mysql] [-conn="root:@tcp(127.0.0.1:3306)/test"] [-d
 ```
 
 </div>
+
+## دستور dockerize
+
+دستور `dockerize` یک dockerfile برای برنامه beego شما ایجاد میکند ، dockerfile کامپایل شده و وابستگی ها را از `godep` دریافت میکند و entrypoint را تنظیم میکند.
+
+گزینه های این دستور عبارت اند از:
+
+<div dir="ltr">
+
+- `-expose=8080`
+
+</div>
+
+پورت یا پورت هایی که از طریق آنها docker-container قابل رویت است.
+
+<div dir="ltr">
+
+- `-image=library/golang`
+
+</div>
+
+image پایه docker container شما را مشخص میکند.
+
+مثال:
+
+<div dir="ltr">
+
+```bash
+bee dockerize -expose="3000,80,25"
+```
+
+</div>
+
+## دستور dlv
+
+`bee` با استفاده از ابزار دیباگ [delve](https://github.com/gadelkareem/delve) یک debug session ایجاد میکند.
+
+گزینه های این دستور عبارت اند از:
+
+
+<div dir="ltr">
+
+- `-port=8181`
+
+</div>
+
+پورتی که برای client به آن گوش میدهد.
+
+<div dir="ltr">
+
+- `-package`
+
+</div>
+
+مشخص کردن پکیج مورد نظر برای دیباگ
+
+<div dir="ltr">
+
+- `-verbose=false`
+
+</div>
+
+فعال سازی حالت verbose
+
+
+## دستور server
+
+یک api application با گزینه های داده شده برای شما میسازد.
+
+flagهای این دستور:
+
+<div dir="ltr">
+
+- `-a`
+
+</div>
+
+آدرس گوش دادن
+
+<div dir="ltr">
+
+- `-f`
+
+</div>
+
+fold کردن فایل های استاتیک
+
+<div dir="ltr">
+
+- `-p`
+
+</div>
+
+پورت گوش دادن 
+
 
 ## کانفیگ ابزار bee
 
