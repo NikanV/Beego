@@ -5,6 +5,17 @@
 ### 📝فهرست
  - [نصب bee](#نصب-bee)
  - [دستورات bee](#دستورات-bee)
+   - [دستور new](#دستور-new)
+   - [دستور api](#دستور-api)
+   - [دستور run](#دستور-run)
+   - [دستور pack](#دستور-pack)
+   - [دستور bale](#دستور-bale)
+   - [دستور version](#دستور-version)
+   - [دستور generate](#دستور-generate)
+   - [دستور migrate](#دستور-migrate)
+   - [دستور dockerize](#دستور-dockerize)
+   - [دستور dlv](#دستور-dlv)
+   - [دستور server](#دستور-server)
  - [کانفیگ ابزار bee](#کانفیگ-ابزار-bee)
 
 ## نصب bee
@@ -29,7 +40,8 @@ go get -u github.com/beego/bee/v2@latest
 
  <p align=center><img src="./src/images/commands.png" width=500 /></p>
 
-## دستور new<br>
+## دستور new
+
   دستور `new` یک پروژه وب جدید ایجاد میکند. شما میتوانید با دستور زیر یک پروژه جدید beego درست کنید که فایل ها و پوشه های پیشفرض را ایجاد میکند.
 
 <div dir="ltr">
@@ -43,7 +55,7 @@ bee new <project_name>
 
  <p align=center><img src="./src/images/defaults.png" width=500 /></p>
 
- ## دستور api
+## دستور api
 
  دستور `api` یک اپلیکیشن API جدید ایجاد میکند. در پایین سینتکس دستور `api` و نتیجه اجرای آن را میبینید:
 
