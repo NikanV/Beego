@@ -103,6 +103,6 @@ if err != nil {
 |<div>`req.ToXml(result interface{})`</div> |<div>`error`</div>                  |فایل response که به فرمت `xml` است را به یک object تبدیل میکند                 |
 
   
-  [بازگشت](https://github.com/NikanV/Beego/blob/main/Introduction/client.md?)
+  [بازگشت](https://github.com/NikanV/Beego/blob/main/Introduction/Client.md?)
 
 </div>
