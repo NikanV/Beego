@@ -5,10 +5,10 @@
   
   چهارچوب beego یک restful http framework در زبان go بر پایه معماری mvc (models, views & controllers) میباشد. این framework که opensource نیز میباشد برای توسعه برنامه‌ها در مقیاس صنعتی نوشته شده است که از ۴ بخش `client`، `tasks`، `base modules` و `server` تهیه شده است:
 	
-1. [base modules](https://github.com/NikanV/Beego/blob/introbranch/Introduction/BaseModules.md)
-2. [tasks](https://github.com/NikanV/Beego/blob/introbranch/Introduction/Tasks.md)
-3. [client](https://github.com/NikanV/Beego/blob/introbranch/Introduction/Client.md)
-4. [server](https://github.com/NikanV/Beego/blob/introbranch/Introduction/Server.md)
+1. [base modules](./Introduction/BaseModules.md)
+2. [tasks](./Introduction/Tasks.md)
+3. [client](./Introduction/Client.md)
+4. [server](./Introduction/Server.md)
   
 	
 ![architecture](https://github.com/NikanV/Beego/blob/873db45aaa31f33c1b44baa751a14b07d2edfb54/Introduction/src/images/beegomap.png)
