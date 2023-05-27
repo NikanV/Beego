@@ -37,7 +37,6 @@ tk1 := task.NewTask($name$,$taskformat$, $TaskFunc$) *Task
   
   
   
-[بازگشت]
-  (https://github.com/NikanV/Beego/blob/main/Introduction/README.md)
+[بازگشت](https://github.com/NikanV/Beego/blob/main/Introduction/README.md)
 
 </div>
