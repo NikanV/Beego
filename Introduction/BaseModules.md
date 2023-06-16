@@ -6,6 +6,8 @@
 - [log module](#log-module)
 - [config module](#config-module)
 - [admin module](#admin-module)
+- [back](https://github.com/NikanV/Beego/blob/main/Introduction/README.md)
+
  
 
 ## log module:
@@ -357,5 +359,6 @@ admin.StatisticsMap.GetMap(os.Stdout)
 	
 	
 	
-	
+[بازگشت](https://github.com/NikanV/Beego/blob/main/Introduction/README.md)
+
 </div>
